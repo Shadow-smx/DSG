@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Budget Plans - Digital Support Group (DSG)</title>
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap 5 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
+<style>
+    #budget-hero {
+    background: linear-gradient(135deg, #f8020227, black);}
+
+    body { 
+    font-family: 'Merriweather', sans-serif; 
+    background:#000000fb;
+    color: #fff; 
+    scroll-behavior: smooth; }
+
+    /* Navbar */
+    .navbar {
+        background: black;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
+    }
+    .navbar-brand {
+        font-weight: 700;
+        letter-spacing: 1px;
+        transition: 0.3s ease;
+    }
+    .navbar-brand:hover {
+        color: #d80000 !important;
+        transform: scale(1.05);
+    }
+    .nav-link {
+        position: relative;
+        color: #ffffff !important;
+        transition: color 0.3s ease;
+    }
+    .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: 0;
+        height: 2px;
+        background-color: #d80000;
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+    }
+    .nav-link:hover::after {
+        width: 70%;
+    }
+    .nav-link:hover {
+        color: #d80000 !important;
+    }
+    /* NAVBAR END */
+
+    /* Link Styles */
+    a { 
+        text-decoration: none; }
+
+    /* LINK STYLES END */
+
+    /* Neon Styles */
+    .neon-text { 
+        color: #ff0000; 
+        text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000; }
+    .neon-btn { 
+        border: 2px solid #ff0000; 
+        color: #ff0000; 
+        transition: all 0.3s; }
+    .neon-btn:hover { 
+        background-color: #ff0000; 
+        color: #fff; }
+    /* NEON STYLES END */
+
+    /* Budget Details Section */
+    .budget-detail-section {
+        margin-top: 5rem;
+        padding: 3rem 0;
+        background: rgba(20, 20, 20, 0.7);
+        border-radius: 20px;
+        box-shadow: 0 0 30px rgba(255, 0, 0, 0.2);
+    }
+
+    .budget-detail-card {
+        background: rgba(30, 30, 30, 0.8);
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border-left: 4px solid;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .budget-detail-card:hover {
+        transform: translateX(10px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .low-range-detail {
+        border-left-color: #4CAF50;
+    }
+
+    .med-range-detail {
+        border-left-color: #2196F3;
+    }
+
+    .high-range-detail {
+        border-left-color: #FF9800;
+    }
+
+    .detail-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    /* Expanded card styles using :target */
+    .budget-detail-card {
+        transition: all 0.4s ease;
+    }
+
+    .budget-detail-card:target {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        max-width: 1200px;
+        height: auto;
+        max-height: 90vh;
+        z-index: 1050;
+        overflow-y: auto;
+        box-shadow: 0 0 50px rgba(255, 0, 0, 0.5);
+        border-radius: 20px;
+        padding: 3rem;
+    }
+
+    .budget-detail-card:target .expanded-content {
+        display: block;
+    }
+
+    .budget-detail-card:target .view-more-btn {
+        display: none;
+    }
+
+    .budget-detail-card:target .close-btn {
+        display: flex;
+    }
+
+    .expanded-content {
+        display: none;
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .expanded-content h4 {
+        color: #ff0000;
+        margin-bottom: 1rem;
+    }
+
+    .expanded-content ul {
+        padding-left: 1.5rem;
+    }
+
+    .expanded-content li {
+        margin-bottom: 0.5rem;
+    }
+
+    /* Overlay for expanded cards */
+    .budget-detail-card:target::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: -1;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(255, 0, 0, 0.2);
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .close-btn:hover {
+        background: rgba(255, 0, 0, 0.5);
+        color: white;
+        text-decoration: none;
+    }
+
+    /* Footer */
+    footer {
+        margin-top: 5rem;
+        padding: 2rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand neon-text" href="#home">DSG</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav fw-bold text-center">
+        <li class="nav-item"><a class="nav-link text-white" href="../index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="../index.html#about">About</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="../index.html#our_team">Our Team</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="../index.html#services">Services</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="../index.html#portfolio">Portfolio</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="../index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="budget-hero" class="d-flex align-items-center" style="min-height:60vh; padding-top:80px;">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-8 mx-auto text-center">
+        <h1 class="display-4 fw-bold mb-4">Our <span class="neon-text">Budget Plans</span></h1>
+        <p class="lead text-secondary mb-4">Choose the perfect plan that fits your needs and budget. We offer three distinct tiers to help bring your digital vision to life.</p>
+        <a href="#budget-cards" class="btn neon-btn">View Plans</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Budget Details Section -->
+<section class="budget-detail-section">
+  <div class="container">
+    <h2 class="text-center mb-5">Budget <span class="neon-text">Details</span></h2>
+    
+    <div class="row">
+      <!-- Low-Range Details -->
+      <div class="col-lg-4 col-md-6">
+        <div class="budget-detail-card low-range-detail" id="low-detail">
+          <a href="#" class="close-btn">×</a>
+          <div class="detail-icon text-center" style="color: #4CAF50;">💰</div>
+          <h3 class="neon-text text-center">Low-Range Budget</h3>
+          <p class="text-secondary">Our entry-level budget is designed for startups and small businesses looking to establish their online presence without breaking the bank.</p>
+          <h5 class="mt-4">Ideal For:</h5>
+          <ul>
+            <li>Personal portfolios</li>
+            <li>Small local businesses</li>
+            <li>Startups with limited funding</li>
+            <li>Non-profit organizations</li>
+          </ul>
+          <h5 class="mt-4">What to Expect:</h5>
+          <p>With our low-range budget, you'll get a professional, mobile-friendly website that effectively communicates your brand message and helps you connect with your target audience.</p>
+          
+          <!-- Expanded Content -->
+          <div class="expanded-content">
+            <h4>Detailed Breakdown</h4>
+            <p>Our low-range budget includes all the essential elements to get your business online:</p>
+            <ul>
+              <li>Fully responsive design that works on all devices</li>
+              <li>SEO optimization to help your site rank in search engines</li>
+              <li>Integration with your social media profiles</li>
+              <li>Contact forms to capture leads</li>
+              <li>Basic analytics setup to track visitor behavior</li>
+              <li>Training on how to update your website content</li>
+            </ul>
+            
+            <h4>Process</h4>
+            <p>Our streamlined process ensures you get your website quickly without compromising quality:</p>
+            <ul>
+              <li>Initial consultation to understand your needs</li>
+              <li>Design mockup presentation and feedback</li>
+              <li>Development of the website</li>
+              <li>Testing across devices and browsers</li>
+              <li>Launch and handover</li>
+            </ul>
+          </div>
+          
+          <div class="text-center mt-4">
+            <a href="#low-detail" class="btn neon-btn view-more-btn">View More</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Med-Range Details -->
+      <div class="col-lg-4 col-md-6">
+        <div class="budget-detail-card med-range-detail" id="med-detail">
+          <a href="#" class="close-btn">×</a>
+          <div class="detail-icon text-center" style="color: #2196F3;">💼</div>
+          <h3 class="neon-text text-center">Med-Range Budget</h3>
+          <p class="text-secondary">Our mid-range option offers enhanced features and customization for businesses ready to scale their digital operations.</p>
+          <h5 class="mt-4">Ideal For:</h5>
+          <ul>
+            <li>Growing businesses</li>
+            <li>E-commerce stores</li>
+            <li>Professional service providers</li>
+            <li>Educational platforms</li>
+          </ul>
+          <h5 class="mt-4">What to Expect:</h5>
+          <p>The med-range budget delivers a fully customized website with advanced functionality, improved user experience, and tools to help your business grow online.</p>
+          
+          <!-- Expanded Content -->
+          <div class="expanded-content">
+            <h4>Detailed Breakdown</h4>
+            <p>Our medium-range budget builds on the essentials with advanced features:</p>
+            <ul>
+              <li>Custom design tailored to your brand identity</li>
+              <li>E-commerce functionality with product management</li>
+              <li>Content management system for easy updates</li>
+              <li>Advanced SEO strategies for better visibility</li>
+              <li>Integration with payment gateways</li>
+              <li>Customer account creation and management</li>
+            </ul>
+            
+            <h4>Process</h4>
+            <p>Our comprehensive process ensures your website meets all your business needs:</p>
+            <ul>
+              <li>In-depth discovery session to define requirements</li>
+              <li>Wireframe creation and approval</li>
+              <li>Design mockups with multiple revision rounds</li>
+              <li>Development with regular progress updates</li>
+              <li>Thorough testing including user experience testing</li>
+              <li>Launch and ongoing support</li>
+            </ul>
+          </div>
+          
+          <div class="text-center mt-4">
+            <a href="#med-detail" class="btn neon-btn view-more-btn">View More</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- High-Range Details -->
+      <div class="col-lg-4 col-md-6">
+        <div class="budget-detail-card high-range-detail" id="high-detail">
+          <a href="#" class="close-btn">×</a>
+          <div class="detail-icon text-center" style="color: #FF9800;">🚀</div>
+          <h3 class="neon-text text-center">High-Range Budget</h3>
+          <p class="text-secondary">Our premium solution for established businesses requiring complex, scalable digital solutions with extensive customization.</p>
+          <h5 class="mt-4">Ideal For:</h5>
+          <ul>
+            <li>Large corporations</li>
+            <li>Enterprise-level applications</li>
+            <li>Complex e-commerce platforms</li>
+            <li>Marketplace websites</li>
+          </ul>
+          <h5 class="mt-4">What to Expect:</h5>
+          <p>The high-range budget provides a completely bespoke digital solution with advanced features, robust security, and comprehensive support to meet your business objectives.</p>
+          
+          <!-- Expanded Content -->
+          <div class="expanded-content">
+            <h4>Detailed Breakdown</h4>
+            <p>Our high-range budget offers enterprise-level solutions:</p>
+            <ul>
+              <li>Fully custom web application development</li>
+              <li>Advanced e-commerce with inventory management</li>
+              <li>Multi-vendor marketplace functionality</li>
+              <li>Custom CRM integration</li>
+              <li>Advanced analytics and reporting dashboard</li>
+              <li>API development and integration</li>
+            </ul>
+            
+            <h4>Process</h4>
+            <p>Our enterprise-level process ensures your project's success:</p>
+            <ul>
+              <li>Comprehensive requirements gathering</li>
+              <li>Technical specification documentation</li>
+              <li>Agile development with sprints</li>
+              <li>Regular stakeholder reviews</li>
+              <li>Quality assurance and security testing</li>
+              <li>Deployment and ongoing maintenance</li>
+            </ul>
+          </div>
+          
+          <div class="text-center mt-4">
+            <a href="#high-detail" class="btn neon-btn view-more-btn">View More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Additional Info -->
+    <div class="row mt-5">
+      <div class="col-lg-8 mx-auto">
+        <div class="text-center p-4" style="background: rgba(255, 0, 0, 0.1); border-radius: 15px;">
+          <h4 class="neon-text mb-3">Need a Custom Solution?</h4>
+          <p class="text-light">Don't see exactly what you're looking for? We offer fully customized budget plans tailored to your specific requirements. Contact us to discuss your project and get a personalized quote.</p>
+          <a href="index.html#contact" class="btn neon-btn mt-2">Get Custom Quote</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-3 text-center bg-black">
+  &copy; 2025 Digital Support Group. All rights reserved.
+</footer>
+
+</body>
+</html>

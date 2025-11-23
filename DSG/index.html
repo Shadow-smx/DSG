@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Support Group (DSG)</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
+    <style>
+      #home {
+      background: linear-gradient(135deg, #f8020227, black);}
+
+      body { 
+      font-family: 'Merriweather', sans-serif; 
+      background:#000000fb;
+      color: #fff; 
+      scroll-behavior: smooth; }
+
+      /* Navbar */
+      .navbar {
+          background: black;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(8px);
+      }
+      .navbar-brand {
+          font-weight: 700;
+          letter-spacing: 1px;
+          transition: 0.3s ease;
+      }
+      .navbar-brand:hover {
+          color: #d80000 !important;
+          transform: scale(1.05);
+      }
+      .nav-link {
+          position: relative;
+          color: #ffffff !important;
+          transition: color 0.3s ease;
+      }
+      .nav-link::after {
+          content: "";
+          position: absolute;
+          left: 50%;
+          bottom: 0;
+          width: 0;
+          height: 2px;
+          background-color: #d80000;
+          transition: all 0.3s ease;
+          transform: translateX(-50%);
+      }
+      .nav-link:hover::after {
+          width: 70%;
+      }
+      .nav-link:hover {
+          color: #d80000 !important;
+      }
+      /* NAVBAR END */
+
+      /* Link Styles */
+      a { 
+          text-decoration: none; }
+
+      /* LINK STYLES END */
+
+      /* Neon Styles */
+      .neon-text { 
+          color: #ff0000; 
+          text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000; }
+      .neon-btn { 
+          border: 2px solid #ff0000; 
+          color: #ff0000; 
+          transition: all 0.3s; }
+      .neon-btn:hover { 
+          background-color: #ff0000; 
+          color: #fff; }
+          /* NEON STYLES END */
+
+      .hero-border { 
+          border: 4px solid #ff0000; 
+          border-radius: 50%; 
+          box-shadow: 0 0 15px #ff0000, inset 0 0 15px #ff0000; 
+          animation: pulse 3s infinite alternate; }
+
+      @keyframes pulse { 
+          0% { opacity: .7; 
+          box-shadow:0 0 10px #ff0000,inset 0 0 10px #ff0000; } 
+          100% { opacity: 1; 
+          box-shadow:0 0 20px #ff0000,inset 0 0 20px #ff0000; } }
+      .fade-in { 
+          opacity: 0; 
+          transform: translateY(20px); 
+          transition: all 0.7s ease-out; }
+
+      .fade-in.visible { 
+          opacity: 1; 
+          transform: translateY(0); }
+
+      .caret { 
+          display: inline-block; 
+          width: 3px; 
+          height: 1.2em; 
+          background: #ff0000; 
+          margin-left: 6px; 
+          animation: blink 1s steps(1) infinite; }
+
+      @keyframes blink { 50% { opacity: 0; } }
+
+      /* Feature cards Styles */
+      .card {
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(255, 0, 0, 0.478);
+      transition: all 0.3s ease;
+      }
+
+      .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 6px 25px rgba(255, 0, 0, 0.871);
+      }
+
+      .card img {
+      border-radius: 20px 20px 0 0;
+      }
+
+      #portfolio .card-img-top {
+      height: 200px;
+      object-fit: cover;
+      }
+
+
+      /* Contact form styles */
+      .contact-card {
+      position: relative;
+      z-index: 2;
+      background: rgb(0, 0, 0);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 1rem;
+      padding: 3rem 2.5rem;
+      max-width: 600px;
+      width: 100%;
+      margin: 5rem auto 2rem;
+      box-shadow: 1px 10px 35px rgba(239, 27, 27, 0.2);
+      backdrop-filter: blur(18px);
+      transition: all 0.4s ease;
+      }
+
+      .contact-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 35px rgba(255, 0, 0, 0.854);
+      }
+
+      .contact-card h1 {
+      color: #ff1919;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+      text-align: center;
+      }
+
+      /* Form inputs Style */
+      .form-control,
+      .form-select,
+      textarea {
+      background-color:  rgba(255, 255, 255, 0.402);
+      border: none;
+      color: #000000;
+      font-size: 0.95rem;
+      position: relative;
+      z-index: 1;
+      }
+      .form-control:focus,
+      .form-select:focus,
+      textarea:focus {
+      background-color: rgba(255, 255, 255, 0.877);
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.808);
+      color: #000000;
+      }
+
+      /* Button style */
+      .btn-info {
+      background: linear-gradient(135deg, #b81414, #ee3737, #ffffff);
+      border: none;
+      color: white;
+      font-weight: 600;
+      border-radius: 50px;
+      padding: 0.6rem 0;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgb(242, 42, 42);
+      }
+      .btn-info:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(244, 14, 14, 0.875);
+      }
+      /* CONTACT FORM STYLES END */
+
+      /* Carousel Styles */
+      .carousel-control-custom-circle {
+        background-color: black;
+        border: 2px solid #ff0000;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 10px #ff0000;
+        color: #ff0000;
+        font-size: 1.2rem;
+        text-shadow: 0 0 5px #ff0000;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+      .carousel-control-custom-circle:hover {
+        border-color: #00f;
+        box-shadow: 0 0 15px #00f;
+        text-shadow: 0 0 8px #00f;
+        color: #00f;
+      }
+
+      /* Footer */
+      footer {
+        margin-top: 5rem;
+        padding: 2rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+    </style>
+</head>
+
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand neon-text" href="#home">DSG</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav fw-bold text-center">
+        <li class="nav-item"><a class="nav-link text-white" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="#our_team">Our Team</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="#services">Services</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="#portfolio">Portfolio</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="home" class="d-flex align-items-center" style="min-height:100vh; padding-top:80px;">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 mb-4 mb-lg-0 fade-in">
+        <h1>Hello, We are</h1>
+        <h2 class="display-4 fw-bold">
+          <span id="typed-target"></span><span class="caret"></span>
+        </h2>
+        <h3 class="mb-3">Full Stack Developer & Creative Designer</h3>
+        <p class="text-secondary mb-4">Creating exceptional digital experiences through innovative web development and stunning design solutions.</p>
+        <div class="d-flex gap-2 mb-4">
+          <a class="btn neon-btn" href="#">Download CV</a>
+          <a class="btn neon-btn" href="#contact">Contact Me</a>
+        </div>
+      </div>
+      <div class="col-lg-6 text-center fade-in">
+        <div class="position-relative d-inline-block">
+          <img src="img/3.png" class="rounded-circle img-fluid" alt="Profile" style="width:300px; height:300px; object-fit:cover;">
+          <div class="hero-border position-absolute top-0 start-0 w-100 h-100"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="py-5 fade-in">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-4 text-center mb-4 mb-lg-0">
+        <img src="img/2.png" class="rounded-circle img-fluid" alt="Sobre Nosaltres" style="width:250px; height:250px; object-fit:cover;">
+      </div>
+      <div class="col-lg-8">
+        <h2>Sobre <span class="neon-text">Digital Support Group</span></h2>
+        <p class="text-secondary">
+          Som una empresa amb un llarg recorregut, especialitzada en la implementació i manteniment d'infraestructures informàtiques i de xarxa. 
+          Amb més de 3 anys d'experiència en projectes similars, hem ajudat diferents centres educatius a modernitzar i optimitzar els seus espais tecnològics amb solucions adaptades.
+        </p>
+        <p class="text-secondary">
+          Ens encarreguem de tot el maquinari, el cablejat i la infraestructura de xarxa per garantir un funcionament òptim, estable i segur de tots els equips del centre.
+          Les nostres propostes estan dissenyades per satisfer les necessitats reals i l'ús previst dels equips a cada espai, oferint una combinació de rendiment, fiabilitat i relació qualitat-preu.
+        </p>
+        <div class="d-flex flex-wrap gap-2 mb-3">
+          <span class="badge border border-danger">Infraestructures IT</span>
+          <span class="badge border border-danger">Cablejat de xarxa</span>
+          <span class="badge border border-danger">Implementació de maquinari</span>
+          <span class="badge border border-danger">Tecnologia educativa</span>
+        </div>
+        <a href="#services" class="btn neon-btn">Explora els Nostres Serveis</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Our Team Section -->
+<section id="our_team" class="py-5 fade-in">
+  <div class="container">
+    <h1 class="text-center mb-5">Our <span class="neon-text">Team</span></h1>
+  </div>
+</section>
+
+<!-- Team Carousel Section -->
+<section id="team-carousel" class="py-5 fade-in">
+  <div class="d-flex justify-content-center mt-4">
+    <div class="position-relative" style="width: 40rem; height: 20rem;">
+      <div class="card bg-black text-white h-100 p-2">
+        <div id="cardCarouselFixed" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="https://via.placeholder.com/400x200?text=Gala+Serrano" class="d-block w-100 card-img-top" alt="Gala Serrano">
+              <div class="card-body">
+                <h5 class="card-title neon-text fw-bold">Gala Serrano</h5>
+                <p class="card-text text-secondary">Administrador de Sistemas Operativos i Redes</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="https://via.placeholder.com/400x200?text=Dil+Shair" class="d-block w-100 card-img-top" alt="Dil Shair">
+              <div class="card-body">
+                <h5 class="card-title neon-text fw-bold">Dil Shair</h5>
+                <p class="card-text text-secondary">Ciber Seguretat</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="https://via.placeholder.com/400x200?text=Salman+Bachir" class="d-block w-100 card-img-top" alt="Salman Bachir">
+              <div class="card-body">
+                <h5 class="card-title neon-text fw-bold">Salman Bachir</h5>
+                <p class="card-text text-secondary">Web Developer</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between mt-4">
+        <button type="button" data-bs-target="#cardCarouselFixed" data-bs-slide="prev" style="border: none; background: transparent; padding: 0; margin-left: 250px;">
+          <span class="carousel-control-custom-circle" aria-hidden="true">&leftarrow;</span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button type="button" data-bs-target="#cardCarouselFixed" data-bs-slide="next" style="border: none; background: transparent; padding: 0; margin-right: 250px;">
+          <span class="carousel-control-custom-circle" aria-hidden="true">&rightarrow;</span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="py-5 fade-in">
+  <div class="container">
+    <h2 class="text-center mb-5">Cursed <span class="neon-text">Services</span></h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card bg-black text-white">
+          <div class="card-body text-center">
+            <h5 class="card-title neon-text">Maquinari</h5>
+            <p class="card-text text-secondary">Building responsive and modern websites using latest web technologies.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card bg-black text-white">
+          <div class="card-body text-center">
+            <h5 class="card-title neon-text">Cablejat</h5>
+            <p class="card-text text-secondary">Crafting visually stunning graphics for branding and web presence.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card bg-black text-white">
+          <div class="card-body text-center">
+            <h5 class="card-title neon-text">Infraestructura de xarxa</h5>
+            <p class="card-text text-secondary">Promoting brands with creative marketing strategies online.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Hardware Section -->
+<section id="Hardware" class="py-5 fade-in"> 
+  <div class="container">
+    <h2 class="text-center mb-5">Cursed <span class="neon-text">Hardware</span></h2>
+    <div class="row g-4 justify-content-center">
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card bg-black text-white h-100 p-2">   
+          <img src="" class="card-img-top" alt="Website Design">
+          <div class="card-body px-3">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class="badge text-bg-success py-2 px-3 fw-normal" style="background-color:#4CAF50 !important;">Web Development</span>
+              <h4 class="mb-0 text-white">$169</h4> 
+            </div>
+            <h5 class="card-title text-white fw-bold">Website Design</h5>
+            <p class="card-text text-secondary" style="min-height: 4.5em;">
+              Et architecto provident deleniti facere repellat nobis iste. Id facere quia dolores dolorem tempore.
+            </p>
+            <hr class="text-secondary opacity-25">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center">
+                <img src="" alt="Antonio" class="rounded-circle me-2" style="width:30px; height:30px; object-fit:cover;">
+                <small class="text-white">Antonio</small>
+              </div>
+              <div class="d-flex align-items-center text-secondary">
+                <small class="me-3">👥 50</small>
+                <small>❤️ 65</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card bg-black text-white h-100 p-2">
+          <img src="" class="card-img-top" alt="Search Engine Optimization">
+          <div class="card-body px-3">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class="badge text-bg-success py-2 px-3 fw-normal" style="background-color:#6A5ACD !important;">Marketing</span>
+              <h4 class="mb-0 text-white">$250</h4>
+            </div>
+            <h5 class="card-title text-white fw-bold">Search Engine Optimization</h5>
+            <p class="card-text text-secondary" style="min-height: 4.5em;">
+              Et architecto provident deleniti facere repellat nobis iste. Id facere quia dolores dolorem tempore.
+            </p>
+            <hr class="text-secondary opacity-25">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center">
+                <img src="" alt="Lana" class="rounded-circle me-2" style="width:30px; height:30px; object-fit:cover;">
+                <small class="text-white">Lana</small>
+              </div>
+              <div class="d-flex align-items-center text-secondary">
+                <small class="me-3">👥 35</small>
+                <small>❤️ 42</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card bg-black text-white h-100 p-2">
+          <img src="" class="card-img-top" alt="Copywriting">
+          <div class="card-body px-3">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class="badge text-bg-success py-2 px-3 fw-normal" style="background-color:#32CD32 !important;">Content</span>
+              <h4 class="mb-0 text-white">$180</h4>
+            </div>
+            <h5 class="card-title text-white fw-bold">Copywriting</h5>
+            <p class="card-text text-secondary" style="min-height: 4.5em;">
+              Et architecto provident deleniti facere repellat nobis iste. Id facere quia dolores dolorem tempore.
+            </p>
+            <hr class="text-secondary opacity-25">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center">
+                <img src="" alt="Brandon" class="rounded-circle me-2" style="width:30px; height:30px; object-fit:cover;">
+                <small class="text-white">Brandon</small>
+              </div>
+              <div class="d-flex align-items-center text-secondary">
+                <small class="me-3">👥 20</small>
+                <small>❤️ 85</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Portfolio Section -->
+<section id="portfolio" class="py-5 fade-in">
+  <div class="container">
+    <h2 class="text-center mb-5"><span class="neon-text">Portfolio</span></h2>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-12 col-md-4 col-lg-4">
+          <div class="card bg-transparent border-0 h-100 text-center">
+            <a href="pages/budget.html">
+            <img src="img/INS_Aprendremes.png" alt="Insitut Aprendremes" class="card-img-top rounded-4 shadow">
+            <div class="card-body">
+              <h5><span class="neon-text">Insitut Aprendremes</span></h5>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 col-lg-4">
+          <div class="card bg-transparent border-0 h-100 text-center">
+            <a href="#">
+            <img src="img/INS_barres_i_ones.png" alt="Institut Barres i Ones" class="card-img-top rounded-4 shadow">
+            <div class="card-body">
+              <h5><span class="neon-text">Institut Barres i Ones</span></h5>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 col-lg-4">
+          <div class="card bg-transparent border-0 h-100 text-center">
+            <a href="#">
+            <img src="img/SB.png" alt="ShadowBytw" class="card-img-top rounded-4 shadow">
+            <div class="card-body">
+              <h5><span class="neon-text">ShadowByte</span></h5>
+            </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Contact Section -->
+<section id="contact" class="py-5 fade-in">
+  <div class="container my-5">
+    <div class="row justify-content-center">  
+      <div class="col-lg-8">
+        <div class="contact-card">
+          <h1>Contact Us</h1>
+          <p class="text-center text-light mb-4">
+            Have a question or wish to collaborate with us?
+            Please get in touch by completing the form below.
+          </p>         
+          <form action="https://formspree.io/f/xvgvjvnk" method="POST">
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" name="name" placeholder="Write your name" required>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3"> 
+                <label for="email" class="form-label">E-mail</label>
+                <input type="email" class="form-control" name="email" placeholder="name@exemple.com" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="tel" class="form-label">Telephone</label>
+                <input type="tel" class="form-control" name="tel" placeholder="+xx xxx xx xx xx" pattern="^\+?[0-9\s\-]{7,20}$" required>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Message</label>
+              <textarea class="form-control" name ="message" rows="4" placeholder="Write your message here..." required></textarea>
+            </div>
+            <div class="d-grid">
+              <button id="submitBtn" type="submit" class="btn btn-info text-black fw-bold btn-lg">
+                Submit
+              </button>
+            </div>
+          </form> 
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-3 text-center bg-black">
+  &copy; 2025 Digital Support Group. All rights reserved.
+</footer>
+
+<!-- Typing script + fade-in -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // ---------- typing config ----------
+    const strings = ["Gala Serrano", "Dil Shair", "Salman Bachir"];
+    const typeSpeed = 300;
+    const eraseSpeed = 200;
+    const delayAfter = 1000;
+    const target = document.getElementById('typed-target');
+
+    let strIdx = 0;
+    let charIdx = 0;
+    let typing = true;
+
+    function typeLoop() {
+      const current = strings[strIdx];
+      if (typing) {
+        // Type
+        if (charIdx < current.length) {
+          target.textContent = current.slice(0, charIdx + 1);
+          charIdx++;
+          setTimeout(typeLoop, typeSpeed);
+        } else {
+          // finished typing -> wait then erase
+          typing = false;
+          setTimeout(typeLoop, delayAfter);
+        }
+      } else {
+        // Erase
+        if (charIdx > 0) {
+          target.textContent = current.slice(0, charIdx - 1);
+          charIdx--;
+          setTimeout(typeLoop, eraseSpeed);
+        } else {
+          // finished erasing -> next string
+          typing = true;
+          strIdx = (strIdx + 1) % strings.length;
+          setTimeout(typeLoop, 200);
+        }
+      }
+    }
+
+    // Start typing after small delay
+    setTimeout(typeLoop, 300);
+
+    // ---------- fade-in observer ----------
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+      });
+    }, { threshold: 0.18 });
+
+    document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+  });
+</script>
+
+</body>
+</html>
