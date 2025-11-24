@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pressupostos - Digital Support Group</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Merriweather', sans-serif; 
+            background:#000000fb;
+            color: #fff; 
+            scroll-behavior: smooth;
+        }
+        
+        /* Navbar */
+        .navbar {
+            background: black;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+        }
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: 0.3s ease;
+        }
+        .navbar-brand:hover {
+            color: #d80000 !important;
+            transform: scale(1.05);
+        }
+        .nav-link {
+            position: relative;
+            color: #ffffff !important;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: #d80000;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-link:hover::after {
+            width: 70%;
+        }
+        .nav-link:hover {
+            color: #d80000 !important;
+        }
+        
+        /* Neon Styles */
+        .neon-text { 
+            color: #ff0000; 
+            text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000; 
+        }
+        .neon-btn { 
+            border: 2px solid #ff0000; 
+            color: #ff0000; 
+            transition: all 0.3s; 
+        }
+        .neon-btn:hover { 
+            background-color: #ff0000; 
+            color: #fff; 
+        }
+        
+        /* Budget Cards */
+        .budget-card {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.2);
+        }
+        .budget-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 0, 0, 0.4);
+        }
+        
+        .budget-high {
+            border-color: #ff0000;
+        }
+        
+        .budget-medium {
+            border-color: #ff6b6b;
+        }
+        
+        .budget-low {
+            border-color: #ffa8a8;
+        }
+        
+        /* Tables */
+        .table-dark {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .table-dark th {
+            background-color: rgba(255, 0, 0, 0.3);
+            color: #fff;
+            border: none;
+        }
+        
+        .table-dark td {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Hardware Section */
+        .hardware-section {
+            background: rgba(20, 20, 20, 0.9);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+        }
+        
+        /* Footer */
+        footer {
+            margin-top: 5rem;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Back button */
+        .back-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand neon-text" href="index.html">DSG</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav fw-bold text-center">
+                    <li class="nav-item"><a class="nav-link text-white" href="index.html#home">Inici</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="index.html#about">Sobre Nosaltres</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="index.html#our_team">El Nostre Equip</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="index.html#services">Serveis</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="index.html#portfolio">Projectes</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="index.html#contact">Contacte</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Budget Section -->
+    <section id="budget" class="py-5" style="margin-top: 80px;">
+        <div class="container">
+            <h1 class="text-center mb-5">Pressupostos <span class="neon-text">Institut Aprendremes</span></h1>
+            
+            <div class="row">
+                <!-- High Range Budget -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="budget-card budget-high">
+                        <h3 class="text-center neon-text mb-4">Gama Alta</h3>
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Dispositiu</th>
+                                        <th>Quantitat</th>
+                                        <th>Preu Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>ASUS Vivobook Go 15</td>
+                                        <td>12</td>
+                                        <td>4.428,00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ASUS Vivobook Go 15</td>
+                                        <td>3</td>
+                                        <td>1.107,00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ASUS Vivobook Go 15</td>
+                                        <td>3</td>
+                                        <td>1.107,00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ASUS Chromebook C223</td>
+                                        <td>240</td>
+                                        <td>35.760,00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>MSI Modern 15</td>
+                                        <td>60</td>
+                                        <td>41.940,00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>HP EliteBook 850 G6</td>
+                                        <td>60</td>
+                                        <td>20.940,00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Lenovo IdeaCentre 3</td>
+                                        <td>3</td>
+                                        <td>1.047,00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>HP Slim Desktop</td>
+                                        <td>4</td>
+                                        <td>2.503,96€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>HP Slim Desktop</td>
+                                        <td>3</td>
+                                        <td>1.877,97€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Impressora Làser Xerox</td>
+                                        <td>1</td>
+                                        <td>1.049,00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>HP Color LaserJet Pro</td>
+                                        <td>1</td>
+                                        <td>362,99€</td>
+                                    </tr>
+                                    <tr class="table-danger">
+                                        <td><strong>TOTAL</strong></td>
+                                        <td></td>
+                                        <td><strong>107.694,92€</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Medium Range Budget -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="budget-card budget-medium">
+                        <h3 class="text-center" style="color: #ff6b6b;">Gama Mitja</h3>
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Dispositiu</th>
+                                        <th>Quantitat</th>
+                                        <th>Preu Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>ASUS Vivobook Go 15</td>
+                                        <td>12</td>
+                                        <td>4.428,00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ASUS Vivobook Go 15</td>
+                                        <td>3</td>
+                                        <td>1.107,00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ASUS Vivobook Go 15</td>
+                                        <td>3</td>
+                                        <td>1.107,00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ASUS Chromebook C223</td>
+                                        <td>240</td>
+                                        <td>35.760,00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Lenovo V15 G4</td>
+                                        <td>60</td>
+                                        <td>18.834,00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>HP EliteBook 850 G6</td>
+                                        <td>60</td>
+                                        <td>20.940,00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>HP Slim Desktop</td>
+                                        <td>3</td>
+                                        <td>747,00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>HP Slim Desktop</td>
+                                        <td>4</td>
+                                        <td>996,00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>HP Slim Desktop</td>
+                                        <td>3</td>
+                                        <td>747,00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Impressora Làser Xerox</td>
+                                        <td>1</td>
+                                        <td>1.049,00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>HP Color LaserJet Pro</td>
+                                        <td>1</td>
+                                        <td>362,99€</td>
+                                    </tr>
+                                    <tr class="table-warning">
+                                        <td><strong>TOTAL</strong></td>
+                                        <td></td>
+                                        <td><strong>81.649,99€</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Low Range Budget -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="budget-card budget-low">
+                        <h3 class="text-center" style="color: #ffa8a8;">Gama Baixa</h3>
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Dispositiu</th>
+                                        <th>Quantitat</th>
+                                        <th>Preu Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>HP EliteBook 840 G6</td>
+                                        <td>63</td>
+                                        <td>17.514,00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>HP EliteBook 850 G6</td>
+                                        <td>30</td>
+                                        <td>7.650,00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dell Latitude 3310</td>
+                                        <td>80</td>
+                                        <td>12.800,00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>HP EliteBook 840 G6</td>
+                                        <td>3</td>
+                                        <td>339,00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>HP EliteBook 840 G6</td>
+                                        <td>4</td>
+                                        <td>452,00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>HP EliteBook 840 G6</td>
+                                        <td>3</td>
+                                        <td>339,00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>HP Color LaserJet Pro</td>
+                                        <td>1</td>
+                                        <td>248,00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>HP LaserJet M209d</td>
+                                        <td>1</td>
+                                        <td>243,00€</td>
+                                    </tr>
+                                    <tr class="table-info">
+                                        <td><strong>TOTAL</strong></td>
+                                        <td></td>
+                                        <td><strong>39.585,00€</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hardware Section -->
+            <div class="hardware-section">
+                <h2 class="text-center mb-4 neon-text">Maquinari per al Centre de Processament de Dades (CPD)</h2>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover">
+                        <thead>
+                            <tr>
+                                <th>Tipus de Maquinari</th>
+                                <th>Dispositiu</th>
+                                <th>Quantitat</th>
+                                <th>Preu per Unitat</th>
+                                <th>Preu Total amb IVA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Servidor rack</td>
+                                <td>Lenovo Rack Server 7D76A063EA</td>
+                                <td>1</td>
+                                <td>2.329,84€</td>
+                                <td>2.819,11€</td>
+                            </tr>
+                            <tr>
+                                <td>Blade</td>
+                                <td>Blade HP BL460c Gen9</td>
+                                <td>1</td>
+                                <td>2.130,58€</td>
+                                <td>2.578,00€</td>
+                            </tr>
+                            <tr>
+                                <td>Switch</td>
+                                <td>Level One GEU-2431 Switch 24 Ports Gigabit</td>
+                                <td>8</td>
+                                <td>75,32€</td>
+                                <td>729,12€</td>
+                            </tr>
+                            <tr>
+                                <td>Router</td>
+                                <td>Router Ruijie RG-EG310GH-E</td>
+                                <td>1</td>
+                                <td>190,66€</td>
+                                <td>230,70€</td>
+                            </tr>
+                            <tr>
+                                <td>Rack</td>
+                                <td>StarTech RK1233BKM Armari Rack</td>
+                                <td>2</td>
+                                <td>356,75€</td>
+                                <td>863,34€</td>
+                            </tr>
+                            <tr>
+                                <td>Access point</td>
+                                <td>Ubiquiti UniFi U7 Long-Range WiFi 7</td>
+                                <td>1</td>
+                                <td>148,55€</td>
+                                <td>179,75€</td>
+                            </tr>
+                            <tr>
+                                <td>SAI</td>
+                                <td>Schneider EASY UPS 3000VA</td>
+                                <td>1</td>
+                                <td>962,32€</td>
+                                <td>1.164,41€</td>
+                            </tr>
+                            <tr class="table-success">
+                                <td colspan="4"><strong>TOTAL MAQUINARI CPD</strong></td>
+                                <td><strong>8.564,43€</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Additional Information -->
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <div class="budget-card">
+                        <h4 class="neon-text">Enllaços Relacionats</h4>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="#" class="text-white">📊 TS - Fases - DSG</a></li>
+                            <li class="mb-2"><a href="#" class="text-white">📋 FASE II - Presentació</a></li>
+                            <li class="mb-2"><a href="#" class="text-white">☁️ OVAS M.V - Drive</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="budget-card">
+                        <h4 class="neon-text">Informació Addicional</h4>
+                        <p class="text-light">Aquests pressupostos inclouen tot el maquinari, cablejat i infraestructura de xarxa necessaris per garantir un funcionament òptim, estable i segur de tots els equips del centre.</p>
+                        <p class="text-light">Els preus inclouen l'IVA del 21%.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-3 text-center bg-black">
+        &copy; 2025 Digital Support Group. Tots els drets reservats.
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="btn neon-btn back-btn">Tornar a dalt</a>
+
+    <script>
+        // Simple back to top functionality
+        document.querySelector('.back-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
